@@ -176,15 +176,7 @@ st.sidebar.markdown(
     "**Offline Practice Mode** using pre-loaded professional cases."
 )
 
-# Try to load API key from Streamlit Secrets first
-api_key_default = ""
-try:
-    if "GEMINI_API_KEY" in st.secrets:
-        api_key_default = st.secrets["GEMINI_API_KEY"]
-except Exception:
-    pass
-
-api_key = st.sidebar.text_input("Google Gemini API Key", value=api_key_default, type="password")
+api_key = st.sidebar.text_input("Google Gemini API Key", type="password")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🎓 Credential Badge Profile")
@@ -208,7 +200,7 @@ def query_gemini(api_key_val, prompt_val, system_instruction_val=None, json_mode
     # API key validation helper
     key = api_key_val.strip()
     # Support both old AIza keys and new secure AQ. keys
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={key}"
     headers = {"Content-Type": "application/json"}
     
     contents = {
