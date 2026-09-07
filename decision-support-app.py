@@ -176,7 +176,15 @@ st.sidebar.markdown(
     "**Offline Practice Mode** using pre-loaded professional cases."
 )
 
-api_key = st.sidebar.text_input("Google Gemini API Key", type="password")
+# Try to load API key from Streamlit Secrets first
+api_key_default = ""
+try:
+    if "GEMINI_API_KEY" in st.secrets:
+        api_key_default = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    pass
+
+api_key = st.sidebar.text_input("Google Gemini API Key", value=api_key_default, type="password")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🎓 Credential Badge Profile")
